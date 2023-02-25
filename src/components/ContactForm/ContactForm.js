@@ -4,7 +4,7 @@ import { nanoid } from 'nanoid';
 import * as Yup from 'yup';
 import { Form, FormField, ErrorMessage, AddButton } from './ContactForm.styled';
 
-const RecipeSchema = Yup.object().shape({
+const ContactSchema = Yup.object().shape({
   name: Yup.string()
     .min(2, 'the name is too short')
     .max(100, 'the name is too long')
@@ -29,7 +29,7 @@ export const ContactForm = ({ onAddContact }) => {
         name: '',
         number: '',
       }}
-      validationSchema={RecipeSchema}
+      validationSchema={ContactSchema}
       onSubmit={onSubmit}
     >
       <Form autoComplete="off">
