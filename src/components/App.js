@@ -12,9 +12,15 @@ export class App extends Component {
     filter: '',
   }
 
-  handleAddContact = newContact => this.setState(prevState => ({
-    contacts: [...prevState.contacts, newContact]
-  }));
+  handleAddContact = newContact => {
+    const normName = newContact.name.toLowerCase();
+    if (this.state.contacts.find(({ name }) => name.toLowerCase() === normName)) {
+      alert(`${newContact.name} is already in contacts!`);
+      return false;
+    }
+    this.setState(prevState => ({ contacts: [...prevState.contacts, newContact] }));
+    return true;
+  }
 
   handleDeleteContact = idToDel => this.setState(prevState => ({
     contacts: prevState.contacts.filter(({id}) => (id !== idToDel))
@@ -32,7 +38,7 @@ export class App extends Component {
   }
 
   render() {
-    const { contacts, filter } = this.state;
+    const { filter } = this.state;
     const visibleContacts = this.getVisibleContacts();
 
     return (
